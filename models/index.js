@@ -1,22 +1,13 @@
-const Traveller = require('./traveller');
-const Location = require('./location');
-const Trip = require('./trip');
+const User = require('./User');
+const Project = require('./Project');
 
-/*
-Traveller.hasMany(Trip, {
-    foreignKey: ""
-})
+User.hasMany(Project, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
+});
 
-Trip.hasOne(Location, {
-    foreignKey: ""
-})
-*/
+Project.belongsTo(User, {
+  foreignKey: 'user_id'
+});
 
-Location.belongsToMany(Traveller, {through: Trip, unique: false});
-Traveller.belongsToMany(Location, {through: Trip, unique: false});
-
-module.exports = {
-    Traveller,
-    Location,
-    Trip
-}
+module.exports = { User, Project };
